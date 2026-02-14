@@ -1,0 +1,384 @@
+/* SCI-FI SEARCH COMPONENT CSS */
+.scifi-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* Scale handled via inline style/prop now */
+  transform-origin: center center;
+  width: 100%;
+  max-width: 100%;
+}
+
+.scifi-grid {
+  height: 800px;
+  width: 800px;
+  background-image: linear-gradient(to right, #0f0f10 1px, transparent 1px),
+    linear-gradient(to bottom, #0f0f10 1px, transparent 1px);
+  background-size: 1rem 1rem;
+  background-position: center center;
+  position: absolute;
+  z-index: 0;
+  filter: blur(1px);
+}
+
+.scifi-white,
+.scifi-border,
+.scifi-darkBorderBg,
+.scifi-glow {
+  max-height: 70px;
+  width: 100%;
+  max-width: 100%; /* Ensure background stretches */
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  z-index: 1;
+  border-radius: 12px;
+  filter: blur(3px);
+}
+
+.scifi-input {
+  background-color: #010201;
+  border: none;
+  width: 100%;
+  min-width: 0;
+  height: 56px;
+  border-radius: 10px;
+  color: white;
+  padding-left: 50px; /* Space for icon */
+  padding-right: 20px; /* Space for filter icon or end */
+  font-size: 16px; /* Slightly smaller for better fit */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.scifi-input::placeholder {
+  color: #c0b9c0;
+}
+
+.scifi-input:focus {
+  outline: none;
+}
+
+.scifi-main:focus-within > .scifi-input-mask {
+  display: none;
+}
+
+.scifi-input-mask {
+  display: none; /* Always hide mask to show text */
+  pointer-events: none;
+  width: 100px;
+  height: 20px;
+  position: absolute;
+  background: linear-gradient(90deg, transparent, black);
+  top: 18px;
+  left: 70px;
+}
+
+.scifi-pink-mask {
+  pointer-events: none;
+  width: 30px;
+  height: 20px;
+  position: absolute;
+  background: #cf30aa;
+  top: 10px;
+  left: 5px;
+  filter: blur(20px);
+  opacity: 0.8;
+  transition: all 2s;
+}
+
+.scifi-main:hover > .scifi-pink-mask {
+  opacity: 0;
+}
+
+.scifi-white {
+  max-height: 63px;
+  width: 98%;
+  max-width: 98%;
+  border-radius: 10px;
+  filter: blur(2px);
+}
+
+.scifi-white::before {
+  content: "";
+  z-index: -2;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(83deg);
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  filter: brightness(1.4);
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    #a099d8,
+    rgba(0, 0, 0, 0) 8%,
+    rgba(0, 0, 0, 0) 50%,
+    #dfa2da,
+    rgba(0, 0, 0, 0) 58%
+  );
+  transition: all 2s;
+}
+
+.scifi-white::before {
+    animation: rotate 4s linear infinite;
+}
+
+.scifi-border {
+  max-height: 59px;
+  width: 99%;
+  max-width: 99%;
+  border-radius: 11px;
+  filter: blur(0.5px);
+}
+
+.scifi-border::before {
+  content: "";
+  z-index: -2;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(70deg);
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  filter: brightness(1.4);
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    #201e1e,
+    rgba(0, 0, 0, 0) 8%,
+    rgba(0, 0, 0, 0) 50%,
+    #5f5959,
+    rgba(0, 0, 0, 0) 58%
+  );
+  transition: all 2s;
+}
+
+.scifi-border::before {
+    animation: rotate 4s linear infinite;
+    animation-delay: -2s; /* offset */
+}
+
+.scifi-darkBorderBg {
+  max-height: 65px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.scifi-darkBorderBg::before {
+  content: "";
+  z-index: -2;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(82deg);
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    #a099d8,
+    rgba(0, 0, 0, 0) 8%,
+    rgba(0, 0, 0, 0) 50%,
+    #dfa2da,
+    rgba(0, 0, 0, 0) 58%
+  );
+  transition: all 2s;
+}
+
+.scifi-darkBorderBg::before {
+    animation: rotate 4s linear infinite;
+}
+
+.scifi-glow {
+  overflow: hidden;
+  filter: blur(30px);
+  opacity: 0.4;
+  max-height: 130px;
+  max-width: 354px;
+}
+
+.scifi-glow::before {
+  content: "";
+  z-index: -2;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(60deg);
+  position: absolute;
+  width: 999px;
+  height: 999px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    #a099d8,
+    rgba(0, 0, 0, 0) 8%,
+    rgba(0, 0, 0, 0) 50%,
+    #dfa2da,
+    rgba(0, 0, 0, 0) 58%
+  );
+  transition: all 2s;
+}
+
+.scifi-glow::before {
+    animation: rotate 4s linear infinite;
+}
+
+.scifi-main {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 4px;
+}
+
+.scifi-filter-border {
+  height: 42px;
+  width: 40px;
+  position: absolute;
+  z-index: 1;
+  top: 7px;
+  right: 14px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.scifi-filter-border::before {
+  content: "";
+  z-index: -2;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(70deg);
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  filter: brightness(1.4);
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    #201e1e,
+    rgba(0, 0, 0, 0) 8%,
+    rgba(0, 0, 0, 0) 50%,
+    #5f5959,
+    rgba(0, 0, 0, 0) 58%
+  );
+  transition: all 2s;
+}
+
+.scifi-filter-border::before {
+    animation: rotate 4s linear infinite;
+}
+
+.scifi-filter-icon {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.scifi-search-icon {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes rotate {
+  100% {
+    transform: translate(-50%, -50%) rotate(450deg);
+  }
+}
+
+/* BLACK VARIANT */
+.scifi-search-black .scifi-glow::before {
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    #4a4a4a,
+    rgba(0, 0, 0, 0) 8%,
+    rgba(0, 0, 0, 0) 50%,
+    #808080,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.scifi-search-black .scifi-darkBorderBg::before {
+    background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    #4a4a4a,
+    rgba(0, 0, 0, 0) 8%,
+    rgba(0, 0, 0, 0) 50%,
+    #808080,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.scifi-search-black .scifi-white::before {
+    background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    #666666,
+    rgba(0, 0, 0, 0) 8%,
+    rgba(0, 0, 0, 0) 50%,
+    #aaaaaa,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.scifi-search-black .scifi-border::before {
+    background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    #333333,
+    rgba(0, 0, 0, 0) 8%,
+    rgba(0, 0, 0, 0) 50%,
+    #7a7a7a,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.scifi-search-black .scifi-pink-mask {
+    background: #333333;
+}
+
+.scifi-search-black .scifi-input {
+    color: #ffffff;
+}
+
+.scifi-search-black .scifi-input::placeholder {
+  color: #888888;
+}
+
+/* FIRE VARIANT */
+.scifi-search-fire .scifi-glow::before,
+.scifi-search-fire .scifi-darkBorderBg::before,
+.scifi-search-fire .scifi-white::before,
+.scifi-search-fire .scifi-border::before {
+  background-image: conic-gradient(
+    from 0deg,
+    #f1a183 0%,
+    #ed884c 20%,
+    #e64f25 40%,
+    #bd2630 60%,
+    #991b27 80%,
+    #f1a183 100%
+  );
+}
+
+.scifi-search-fire .scifi-pink-mask {
+    background: #e64f25;
+}
+

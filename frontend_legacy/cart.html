@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Giỏ hàng</title>
+  <link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+<header>
+  <div class="topbar">
+  <div class="nav">
+    <a class="brand" href="./index.html">
+      <div class="logo"></div>
+      <div>
+        <b>Neon Shop</b>
+        <div class="small">Web bán hàng MVP</div>
+      </div>
+    </a>
+    <div class="navlinks">
+      <a class="pill" href="./index.html">🏪 Sản phẩm</a>
+      <a class="pill" href="./cart.html">🛒 Giỏ hàng</a>
+      <a class="pill primary" href="./login.html">🔐 Tài khoản</a>
+    </div>
+  </div>
+</div>
+
+</header>
+
+<div class="container">
+  <div class="card">
+    <h2 style="margin:0 0 10px">🛒 Giỏ hàng</h2>
+    <div id="items"></div>
+    <hr/>
+    <div class="row">
+      <input id="ship" class="input" style="max-width:220px" type="number" value="0" placeholder="Phí ship"/>
+      <input id="disc" class="input" style="max-width:220px" type="number" value="0" placeholder="Giảm giá"/>
+      <button class="btn" id="checkout">Tạo đơn (COD)</button>
+    </div>
+    <div id="msg" class="small" style="margin-top:10px"></div>
+  </div>
+</div>
+
+<script type="module">
+  import { api, money } from "./app.js";
+  const box = document.querySelector("#items");
+  const msg = document.querySelector("#msg");
+
+  let cartItems = [];
+
+  async function load(){
+    try{
+      const data = await api("/cart", { auth:true });
+      cartItems = data.items || [];
+      if (!cartItems.length){
+        box.innerHTML = `<div class="small">Giỏ trống.</div>`;
+        return;
+      }
+      box.innerHTML = cartItems.map(it => `
+        <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0">
+          <div>
+            <b>${it.name}</b><div class="small">SL: ${it.qty}</div>
+          </div>
+          <div style="text-align:right">
+            <div>${money(Number(it.price_at_time)*it.qty)}</div>
+            <button class="btn outline" data-id="${it.product_id}">Xoá</button>
+          </div>
+        </div>
+      `).join("");
+
+      box.querySelectorAll("button[data-id]").forEach(btn=>{
+        btn.onclick = async ()=>{
+          await api("/cart/remove",{method:"POST",auth:true,body:{product_id:btn.dataset.id}});
+          load();
+        };
+      });
+
+    }catch(e){
+      box.innerHTML = `<div class="small">❌ ${e.message} (hãy login)</div>`;
+    }
+  }
+
+  document.querySelector("#checkout").onclick = async ()=>{
+    try{
+      const shipping_fee = Number(document.querySelector("#ship").value||0);
+      const discount = Number(document.querySelector("#disc").value||0);
+      const r = await api("/orders/checkout",{method:"POST",auth:true,body:{shipping_fee,discount,payment_method:"cod"}});
+      msg.textContent = "✅ Tạo đơn thành công: " + r.order_id;
+      load();
+    }catch(e){
+      msg.textContent = "❌ " + e.message;
+    }
+  };
+
+  load();
+</script>
+</body>
+</html>

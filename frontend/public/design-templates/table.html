@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payments Table</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-family: 'Inter', sans-serif;
+            --radius: 8px;
+            --color-border: #e4e4e7;
+            --color-text: #09090b;
+            --color-text-muted: #71717a;
+            --color-bg-subtle: #f4f4f5;
+        }
+        body {
+            font-family: var(--font-family);
+            background-color: #ffffff;
+            color: var(--color-text);
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 960px;
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            background: #fff;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+        .header h1 { margin: 0 0 4px 0; font-size: 24px; font-weight: 600; letter-spacing: -0.5px; }
+        .header p { margin: 0; color: var(--color-text-muted); font-size: 14px; }
+        
+        .btn-add {
+            background: #09090b;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            transition: opacity 0.2s;
+        }
+        .btn-add:hover { opacity: 0.9; }
+
+        .table-wrapper {
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        table { width: 100%; border-collapse: collapse; }
+        thead { background: #fafafa; border-bottom: 1px solid var(--color-border); }
+        th { text-align: left; padding: 14px 16px; font-weight: 500; color: var(--color-text-muted); font-size: 14px; }
+        td { padding: 16px; border-bottom: 1px solid var(--color-border); font-size: 14px; vertical-align: middle; color: #09090b; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background-color: #fafafa; }
+        
+        .checkbox { 
+            width: 16px; height: 16px; 
+            border-radius: 4px; 
+            border: 1px solid #d4d4d8; 
+            accent-color: #09090b; 
+            cursor: pointer; 
+            margin: 0;
+        }
+        
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 10px;
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 500;
+            border: 1px solid transparent;
+            line-height: 1.5;
+        }
+        .bg-success { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
+        .bg-processing { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
+        .bg-pending { background: #fefce8; color: #854d0e; border-color: #fef08a; }
+        .bg-failed { background: #fef2f2; color: #991b1b; border-color: #fecaca; }
+
+        .text-right { text-align: right; }
+        .font-medium { font-weight: 500; }
+        
+        .action-dots { 
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            color: var(--color-text-muted); 
+            font-size: 20px; 
+            cursor: pointer; 
+            line-height: 1;
+        }
+        .action-dots:hover { background-color: #f4f4f5; color: #09090b; }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--color-text-muted);
+        }
+
+        .pagination { display: flex; gap: 8px; }
+        .btn-page {
+            background: white;
+            border: 1px solid var(--color-border);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #09090b;
+            transition: background 0.2s;
+        }
+        .btn-page:hover { background: #f4f4f5; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div>
+            <h1>Payments</h1>
+            <p>Manage your payments.</p>
+        </div>
+        <button class="btn-add">Add Payment</button>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 40px"><input type="checkbox" class="checkbox"></th>
+                    <th style="width: 100px">Status</th>
+                    <th>Email</th>
+                    <th class="text-right">Amount</th>
+                    <th style="width: 40px"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><span class="badge bg-success">Success</span></td>
+                    <td>ken99@example.com</td>
+                    <td class="text-right font-medium">$316.00</td>
+                    <td class="text-center"><div class="action-dots">•••</div></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><span class="badge bg-success">Success</span></td>
+                    <td>abe45@example.com</td>
+                    <td class="text-right font-medium">$242.00</td>
+                    <td class="text-center"><div class="action-dots">•••</div></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><span class="badge bg-processing">Processing</span></td>
+                    <td>monserrat44@example.com</td>
+                    <td class="text-right font-medium">$837.00</td>
+                    <td class="text-center"><div class="action-dots">•••</div></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><span class="badge bg-failed">Failed</span></td>
+                    <td>carmella@example.com</td>
+                    <td class="text-right font-medium">$721.00</td>
+                    <td class="text-center"><div class="action-dots">•••</div></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><span class="badge bg-pending">Pending</span></td>
+                    <td>jason78@example.com</td>
+                    <td class="text-right font-medium">$450.00</td>
+                    <td class="text-center"><div class="action-dots">•••</div></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><span class="badge bg-success">Success</span></td>
+                    <td>sarah23@example.com</td>
+                    <td class="text-right font-medium">$1,280.00</td>
+                    <td class="text-center"><div class="action-dots">•••</div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <div>0 of 6 row(s) selected.</div>
+        <div class="pagination">
+            <button class="btn-page">Previous</button>
+            <button class="btn-page">Next</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

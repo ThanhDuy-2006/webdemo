@@ -1,0 +1,58 @@
+﻿
+> frontend@0.0.0 build
+> vite build
+
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32mΓ£ô[39m 18 modules transformed.
+node.exe : [31mΓ£ù[39m Build failed in 
+600ms
+At C:\Program Files\nodejs\npm.ps1:29 char:3
++   & $NODE_EXE $NPM_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified:  
+   ([31mΓ£ù[39m Build failed in 600ms:Str  
+  ing) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandE 
+   rror
+ 
+[31merror during build:
+[31m[vite:build-import-analysis] [plugin 
+vite:build-import-analysis] 
+src/modules/entertainment/index.js (6:110): 
+Failed to parse source for import analysis 
+because the content contains invalid JS 
+syntax. If you are using JSX, make sure to 
+name the file with the .jsx or .tsx 
+extension.[31m
+file: [36mD:/Tool_Tam_Lum/webbanhang/fronten
+d/src/modules/entertainment/index.js:6:110[3
+1m
+[33m
+4: const LoadingFallback = () => (
+5:     <div className="flex items-center 
+justify-center min-h-[60vh] text-slate-400">
+6:         <div className="w-8 h-8 border-2 
+border-primary border-t-transparent 
+rounded-full animate-spin"></div>
+                                             
+                                             
+                       ^
+7:     </div>
+8: );
+[31m
+    at getRollupError (file:///D:/Tool_Tam_Lu
+m/webbanhang/frontend/node_modules/rollup/dis
+t/es/shared/parseAst.js:402:41)
+    at error (file:///D:/Tool_Tam_Lum/webbanh
+ang/frontend/node_modules/rollup/dist/es/shar
+ed/parseAst.js:398:42)
+    at Object.error (file:///D:/Tool_Tam_Lum/
+webbanhang/frontend/node_modules/rollup/dist/
+es/shared/node-entry.js:22226:20)
+    at Object.error (file:///D:/Tool_Tam_Lum/
+webbanhang/frontend/node_modules/rollup/dist/
+es/shared/node-entry.js:21275:42)
+    at Object.handler (file:///D:/Tool_Tam_Lu
+m/webbanhang/frontend/node_modules/vite/dist/
+node/chunks/config.js:23397:11)[39m

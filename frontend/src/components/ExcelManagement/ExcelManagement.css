@@ -1,0 +1,451 @@
+.excel-container {
+    padding: 24px;
+    background: rgba(11, 16, 32, 0.4);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.excel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.excel-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+/* TABLE SECTION */
+.excel-table-wrapper {
+    width: 100%;
+    height: 450px; /* Fixed initial height */
+    min-height: 200px;
+    overflow-x: auto;
+    overflow-y: auto;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    resize: vertical; /* Allow user to drag height */
+    position: relative;
+    padding-bottom: 5px;
+}
+
+/* Custom Scrollbar (Matching Image) */
+.excel-table-wrapper::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+}
+
+.excel-table-wrapper::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 0px;
+}
+
+.excel-table-wrapper::-webkit-scrollbar-thumb {
+    background: #8e8e8e;
+    border-radius: 10px;
+    border: 3px solid #ffffff; /* Create padding around thumb inside track */
+}
+
+.excel-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #707070;
+}
+
+/* Scrollbar Buttons (Arrows) */
+.excel-table-wrapper::-webkit-scrollbar-button:single-button {
+    background-color: #ffffff;
+    display: block;
+    background-size: 10px;
+    background-repeat: no-repeat;
+}
+
+/* Up Arrow */
+.excel-table-wrapper::-webkit-scrollbar-button:single-button:vertical:decrement {
+    background-position: center 4px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%238e8e8e'><polygon points='50,20 80,70 20,70'/></svg>");
+}
+
+/* Down Arrow */
+.excel-table-wrapper::-webkit-scrollbar-button:single-button:vertical:increment {
+    background-position: center 2px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%238e8e8e'><polygon points='50,80 80,30 20,30'/></svg>");
+}
+
+.excel-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 600px;
+}
+
+.excel-table th, .excel-table td {
+    padding: 16px 10px; /* More vertical space */
+    text-align: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+    vertical-align: middle;
+}
+
+.excel-table th {
+    background: #0f172a !important; /* Solid background to prevent overlap transparency */
+    color: #94a3b8;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 30; /* Higher than items */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.excel-table th.item-col {
+    text-align: left;
+    min-width: 180px;
+    position: sticky;
+    left: 0;
+    z-index: 45; /* Highest z-index for the top-left corner */
+    background: #0f172a !important;
+    border-right: 2px solid rgba(59, 130, 246, 0.3);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+}
+
+.excel-table th.qty-col {
+    width: 60px;
+    font-size: 11px;
+}
+
+.excel-table th.price-col {
+    width: 100px;
+    font-size: 11px;
+}
+
+.excel-table td.item-cell {
+    text-align: left;
+    font-weight: 600;
+    color: #fff;
+    position: sticky;
+    left: 0;
+    z-index: 25; 
+    background: #111827 !important; /* Slightly darker solid background */
+    border-right: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+}
+
+.qty-cell, .price-cell {
+    font-size: 13px;
+    color: #fbbf24;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.price-cell {
+    color: #60a5fa;
+}
+
+.edit-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #3b82f6;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    outline: none;
+    font-size: 13px;
+    width: 100%;
+}
+
+.member-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.member-role {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.role-owner { color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
+.role-admin { color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
+
+/* CHECKBOX CUSTOM */
+.checkbox-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-checkbox {
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-checkbox:hover {
+    border-color: #3b82f6;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.custom-checkbox.checked {
+    background: #10b981;
+    border-color: #10b981;
+}
+
+.custom-checkbox.checked::after {
+    content: "✓";
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.custom-checkbox.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* HISTORY SECTION */
+.excel-history {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.excel-history h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #f1f5f9;
+}
+
+.history-list {
+    max-height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.history-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 13px;
+    color: #94a3b8;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.history-time {
+    color: #64748b;
+    font-size: 11px;
+    min-width: 70px;
+    flex-shrink: 0;
+}
+
+.history-content strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+.action-badge {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.badge-check { color: #10b981; background: rgba(16, 185, 129, 0.1); }
+.badge-uncheck { color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+.badge-create { color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
+.badge-delete { color: #64748b; background: rgba(100, 116, 139, 0.1); }
+
+/* ACTIONS */
+.excel-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.add-item-input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.3s;
+    font-size: 13px;
+}
+
+.add-item-input.w-20 { width: 70px; min-width: 60px; }
+.add-item-input.w-32 { width: 110px; min-width: 90px; }
+.add-item-input.flex-\[2\] { flex: 2; min-width: 150px; }
+.add-item-input.flex-\[3\] { flex: 3; min-width: 200px; }
+
+.add-item-input:focus {
+    border-color: #3b82f6;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 768px) {
+    .excel-container {
+        padding: 12px;
+        gap: 20px;
+    }
+    
+    .excel-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .excel-header h2 {
+        font-size: 18px;
+        text-align: center;
+    }
+    
+    .excel-actions {
+        width: 100%;
+        gap: 8px;
+    }
+    
+    .add-item-input {
+        flex: 1;
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    /* Small mobile tweaks for columns */
+    .excel-table th {
+        font-size: 11px;
+        padding: 12px 6px;
+    }
+
+    .item-cell, .item-col {
+        min-width: 140px !important;
+    }
+
+    .member-header span.text-xs {
+        font-size: 10px;
+    }
+}
+
+/* GRAB BAR / TAP BAR */
+.excel-grab-bar {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: ns-resize; /* North-South resize cursor */
+    background: rgba(11, 16, 32, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+    margin-top: -1px; /* Overlap border */
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.excel-grab-bar:hover, .excel-grab-bar.resizing {
+    background: rgba(59, 130, 246, 0.15);
+    border-top: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.grab-handle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    z-index: 2;
+}
+
+.dots {
+    display: flex;
+    gap: 4px;
+}
+
+.dots span {
+    width: 4px;
+    height: 4px;
+    background: #475569;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.excel-grab-bar:hover .dots span, .excel-grab-bar.resizing .dots span {
+    background: #3b82f6;
+    box-shadow: 0 0 8px #3b82f6;
+    transform: scale(1.2);
+}
+
+.grab-handle .label {
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #475569;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(5px);
+}
+
+.excel-grab-bar:hover .label, .excel-grab-bar.resizing .label {
+    opacity: 1;
+    transform: translateY(0);
+    color: #3b82f6;
+}
+
+.bar-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.excel-grab-bar:hover .bar-glow, .excel-grab-bar.resizing .bar-glow {
+    opacity: 1;
+}
+
+/* Add a scan line animation for extra sci-fi feel */
+.excel-grab-bar.resizing::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #3b82f6;
+    box-shadow: 0 0 15px #3b82f6;
+    animation: scanVertical 1.5s infinite linear;
+}
+
+@keyframes scanVertical {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(24px); }
+}

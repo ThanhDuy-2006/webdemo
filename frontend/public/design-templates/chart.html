@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise Chart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-family: 'Inter', sans-serif;
+            --radius: 12px;
+            --color-border: #e4e4e7;
+            --color-text: #09090b;
+            --color-text-muted: #71717a;
+        }
+        body {
+            font-family: var(--font-family);
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--color-text);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            padding: 24px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        h2 { margin: 0 0 6px 0; font-size: 18px; font-weight: 600; letter-spacing: -0.5px; }
+        p.subtitle { margin: 0 0 32px 0; color: var(--color-text-muted); font-size: 14px; line-height: 1.5; }
+
+        .chart-container {
+            position: relative;
+            height: 250px;
+            width: 100%;
+        }
+
+        svg.chart {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        /* Grid lines */
+        .grid-line { stroke: #f3f4f6; stroke-width: 1; stroke-dasharray: 4 4; } /* Dashed optional, but solid light is cleaner */
+        .grid-line.solid { stroke-dasharray: 0; stroke: #f3f4f6; }
+        
+        /* Data Lines */
+        .line-black { 
+            fill: none; 
+            stroke: #09090b; 
+            stroke-width: 2.5; 
+            stroke-linecap: round; 
+            stroke-linejoin: round; 
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+        .line-gray { 
+            fill: none; 
+            stroke: #d4d4d8; 
+            stroke-width: 2.5; 
+            stroke-linecap: round; 
+            stroke-linejoin: round; 
+        }
+
+        /* Dots */
+        .dot-black { fill: #09090b; stroke: #fff; stroke-width: 2; r: 5; transition: r 0.2s; cursor: pointer; }
+        .dot-black:hover { r: 7; }
+        
+        .dot-gray { fill: #d4d4d8; stroke: #fff; stroke-width: 2; r: 5; }
+
+        .x-axis {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            color: var(--color-text-muted);
+            font-size: 12px;
+            padding: 0 10px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Exercise Minutes</h2>
+    <p class="subtitle">Your exercise minutes are ahead of where you normally are.</p>
+    
+    <div class="chart-container">
+        <svg class="chart" viewBox="0 0 600 200" preserveAspectRatio="none">
+            <!-- Grid Lines -->
+            <line x1="0" y1="50" x2="600" y2="50" class="grid-line solid" />
+            <line x1="0" y1="100" x2="600" y2="100" class="grid-line solid" />
+            <line x1="0" y1="150" x2="600" y2="150" class="grid-line solid" />
+            <line x1="0" y1="200" x2="600" y2="200" class="grid-line solid" style="stroke: #e4e4e7" />
+
+            <!-- Smooth Curves (Bezier) -->
+            
+            <!-- Gray Line (Average) -->
+            <!-- P: (10,140), (105,150), (200,160), (300,145), (400,160), (500,140), (590,120) -->
+            <path d="M10,140 C60,150 70,148 105,150 C150,152 160,160 200,160 C250,160 260,135 300,145 C350,155 360,160 400,160 C450,160 460,140 500,140 C540,140 560,120 590,120" class="line-gray" />
+            
+            <!-- Black Line (Actual) -->
+            <!-- P: (10,160), (105,180), (200,90: PEAK), (300,130), (400,120), (500,130), (590,110) -->
+            <path d="M10,160 C60,170 70,180 105,180 C140,180 160,90 200,90 C250,90 260,125 300,130 C340,135 360,115 400,120 C450,125 460,135 500,130 C540,125 560,110 590,110" class="line-black" />
+
+            <!-- Dots Gray -->
+            <circle cx="10" cy="140" class="dot-gray" />
+            <circle cx="105" cy="150" class="dot-gray" />
+            <circle cx="200" cy="160" class="dot-gray" />
+            <circle cx="300" cy="145" class="dot-gray" />
+            <circle cx="400" cy="160" class="dot-gray" />
+            <circle cx="500" cy="140" class="dot-gray" />
+            <circle cx="590" cy="120" class="dot-gray" />
+
+            <!-- Dots Black -->
+            <circle cx="10" cy="160" class="dot-black" />
+            <circle cx="105" cy="180" class="dot-black" />
+            <circle cx="200" cy="90" class="dot-black" />
+            <circle cx="300" cy="130" class="dot-black" />
+            <circle cx="400" cy="120" class="dot-black" />
+            <circle cx="500" cy="130" class="dot-black" />
+            <circle cx="590" cy="110" class="dot-black" />
+
+        </svg>
+
+        <div class="x-axis">
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+            <span>Sun</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

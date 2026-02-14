@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-family: 'Inter', sans-serif;
+            --color-bg: #ffffff;
+            --color-text: #09090b;
+            --color-text-muted: #71717a;
+            --color-border: #e4e4e7;
+            --color-input-bg: #ffffff;
+            --radius: 8px; /* Bo góc vừa phải, Shadcn thường dùng 0.5rem */
+            --shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--color-text);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 400px;
+            padding: 32px; /* Rộng rãi hơn */
+            border: 1px solid var(--color-border);
+            border-radius: 12px; /* Bo góc lớn hơn 1 chút cho Card */
+            box-shadow: var(--shadow);
+            background: #fff;
+        }
+
+        .text-center { text-align: center; }
+        
+        h1 { 
+            margin: 0 0 6px 0; 
+            font-size: 24px; 
+            font-weight: 600; 
+            letter-spacing: -0.6px; 
+            color: #09090b;
+        }
+        
+        .subtitle { 
+            color: var(--color-text-muted); 
+            font-size: 14px; 
+            margin: 0 0 24px 0; 
+            line-height: 1.5;
+        }
+
+        .btn-group { display: flex; gap: 12px; margin-bottom: 24px; }
+        
+        .btn-outline {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 16px;
+            background: #fff;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            font-size: 14px;
+            font-weight: 500;
+            color: #09090b;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        .btn-outline:hover { background-color: #f4f4f5; }
+        .icon { width: 16px; height: 16px; margin-right: 8px; }
+
+        .divider {
+            position: relative;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--color-border);
+        }
+        .divider span {
+            position: relative;
+            background: #fff;
+            padding: 0 10px;
+            color: var(--color-text-muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group { margin-bottom: 16px; }
+        label { 
+            display: block; 
+            font-size: 14px; 
+            font-weight: 500; 
+            margin-bottom: 6px; 
+            color: #09090b;
+        }
+        
+        input {
+            width: 100%;
+            height: 40px;
+            padding: 8px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            box-sizing: border-box;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.2s ease;
+            color: #09090b;
+        }
+        input::placeholder { color: #a1a1aa; }
+        input:focus { 
+            border-color: #09090b; 
+            box-shadow: 0 0 0 1px #18181b; /* Ring focus effect */
+        }
+
+        .btn-black {
+            width: 100%;
+            height: 40px;
+            background-color: #09090b;
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            margin-top: 8px;
+        }
+        .btn-black:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="text-center">
+        <h1>Create an account</h1>
+        <p class="subtitle">Enter your email below to create your account</p>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn-outline">
+            <svg class="icon" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            GitHub
+        </button>
+        <button class="btn-outline">
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307c-1.813-1.44-4.92-2.88-8.213-2.88-6.64 0-12 5.36-12 12s5.36 12 12 12c3.467 0 6.373-1.12 8.48-3.267 2.16-2.16 2.84-5.213 2.68-7.907h-11.24z"/></svg>
+            Google
+        </button>
+    </div>
+
+    <div class="divider">
+        <span>Or continue with</span>
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="m@example.com">
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password">
+    </div>
+
+    <button class="btn-black">Create Account</button>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+<header>
+  <div class="topbar">
+  <div class="nav">
+    <a class="brand" href="./index.html">
+      <div class="logo"></div>
+      <div>
+        <b>Neon Shop</b>
+        <div class="small">Web bán hàng MVP</div>
+      </div>
+    </a>
+    <div class="navlinks">
+      <a class="pill" href="./index.html">🏪 Sản phẩm</a>
+      <a class="pill" href="./cart.html">🛒 Giỏ hàng</a>
+      <a class="pill primary" href="./login.html">🔐 Tài khoản</a>
+    </div>
+  </div>
+</div>
+
+</header>
+
+<div class="container">
+  <div class="grid">
+    <div class="card">
+      <h3>Đăng nhập</h3>
+      <input id="lemail" class="input" placeholder="Email"/>
+      <input id="lpass" class="input" type="password" placeholder="Mật khẩu" style="margin-top:8px"/>
+      <button class="btn" id="login" style="margin-top:10px">Login</button>
+      <div id="lmsg" class="small" style="margin-top:8px"></div>
+    </div>
+
+    <div class="card">
+      <h3>Đăng ký</h3>
+      <input id="rname" class="input" placeholder="Họ tên"/>
+      <input id="remail" class="input" placeholder="Email" style="margin-top:8px"/>
+      <input id="rpass" class="input" type="password" placeholder="Mật khẩu" style="margin-top:8px"/>
+      <button class="btn" id="register" style="margin-top:10px">Register</button>
+      <div id="rmsg" class="small" style="margin-top:8px"></div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { api, setToken, clearToken } from "./app.js";
+
+  document.querySelector("#login").onclick = async ()=>{
+    const email = document.querySelector("#lemail").value.trim();
+    const password = document.querySelector("#lpass").value;
+    try{
+      const r = await api("/auth/login",{method:"POST",body:{email,password}});
+      setToken(r.token);
+      document.querySelector("#lmsg").textContent = "✅ Login ok";
+    }catch(e){
+      document.querySelector("#lmsg").textContent = "❌ " + e.message;
+    }
+  };
+
+  document.querySelector("#register").onclick = async ()=>{
+    const full_name = document.querySelector("#rname").value.trim();
+    const email = document.querySelector("#remail").value.trim();
+    const password = document.querySelector("#rpass").value;
+    try{
+      const r = await api("/auth/register",{method:"POST",body:{full_name,email,password}});
+      setToken(r.token);
+      document.querySelector("#rmsg").textContent = "✅ Register ok";
+    }catch(e){
+      document.querySelector("#rmsg").textContent = "❌ " + e.message;
+    }
+  };
+</script>
+</body>
+</html>

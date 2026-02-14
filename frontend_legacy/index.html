@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Shop - Sản phẩm</title>
+  <link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+<header>
+  <div class="topbar">
+  <div class="nav">
+    <a class="brand" href="./index.html">
+      <div class="logo"></div>
+      <div>
+        <b>Neon Shop</b>
+        <div class="small">Web bán hàng MVP</div>
+      </div>
+    </a>
+    <div class="navlinks">
+      <a class="pill" href="./index.html">🏪 Sản phẩm</a>
+      <a class="pill" href="./cart.html">🛒 Giỏ hàng</a>
+      <a class="pill primary" href="./login.html">🔐 Tài khoản</a>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="hero">
+    <div class="hero-inner">
+      <div>
+        <h1>🔥 Neon Shop — mua sắm kiểu hiện đại</h1>
+        <p>Tìm nhanh sản phẩm, thêm giỏ, checkout COD. UI gradient + card xịn + cảm giác “app” hiện đại.</p>
+      </div>
+      <div class="badges">
+        <span class="badge">⚡ Fast</span>
+        <span class="badge">🛡️ Secure</span>
+        <span class="badge">✨ Modern UI</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:14px"></div>
+
+  <div class="row">
+    <input id="q" class="input" placeholder="Tìm sản phẩm..." style="flex:1;min-width:240px"/>
+    <button class="btn" id="btnSearch">🔎 Tìm</button>
+  </div>
+
+  <div id="grid" class="grid"></div>
+</div>
+
+</header>
+
+<div class="container">
+  <div class="row">
+    <input id="q" class="input" placeholder="Tìm sản phẩm..." />
+    <button class="btn" id="btnSearch">Tìm</button>
+  </div>
+  <hr/>
+  <div id="grid" class="grid"></div>
+</div>
+
+<script type="module">
+  import { api, money } from "./app.js";
+  const grid = document.querySelector("#grid");
+  const q = document.querySelector("#q");
+
+  async function loadProducts() {
+    const qs = q.value.trim() ? `?q=${encodeURIComponent(q.value.trim())}` : "";
+    const items = await api("/products" + qs);
+    grid.innerHTML = items.map(p => `
+  <div class="card">
+    <div class="row" style="justify-content:space-between;align-items:flex-start">
+      <span class="tag">#${p.slug}</span>
+      <span class="small">
+        Tồn: <b style="color:var(--text)">${p.stock_qty}</b>
+      </span>
+    </div>
+
+    <h3 style="margin:10px 0 6px">${p.name}</h3>
+
+    <div class="price">${money(p.price)}</div>
+
+    <div class="small" style="margin-top:6px;min-height:34px">
+      ${(p.description || "").slice(0, 70)}
+      ${(p.description || "").length > 70 ? "..." : ""}
+    </div>
+
+    <div style="margin-top:12px;display:flex;gap:10px">
+      <a class="btn outline"
+         style="flex:1;text-align:center;text-decoration:none"
+         href="./product.html?id=${p.id}">
+         👀 Xem
+      </a>
+
+      <a class="btn"
+         style="flex:1;text-align:center;text-decoration:none"
+         href="./cart.html">
+         🛒 Mua
+      </a>
+    </div>
+  </div>
+`).join("");
+
+  }
+
+  document.querySelector("#btnSearch").onclick = loadProducts;
+  loadProducts();
+</script>
+</body>
+</html>

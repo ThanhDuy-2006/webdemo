@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Chi tiết</title>
+  <link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+<header>
+ <div class="topbar">
+  <div class="nav">
+    <a class="brand" href="./index.html">
+      <div class="logo"></div>
+      <div>
+        <b>Neon Shop</b>
+        <div class="small">Web bán hàng MVP</div>
+      </div>
+    </a>
+    <div class="navlinks">
+      <a class="pill" href="./index.html">🏪 Sản phẩm</a>
+      <a class="pill" href="./cart.html">🛒 Giỏ hàng</a>
+      <a class="pill primary" href="./login.html">🔐 Tài khoản</a>
+    </div>
+  </div>
+</div>
+
+</header>
+
+<div class="container">
+  <div class="card">
+    <div id="content">Loading...</div>
+  </div>
+</div>
+
+<script type="module">
+  import { api, money } from "./app.js";
+  const params = new URLSearchParams(location.search);
+  const id = params.get("id");
+  const box = document.querySelector("#content");
+
+  async function main(){
+    const p = await api("/products/" + id);
+    box.innerHTML = `
+      <h2 style="margin:0 0 8px">${p.name}</h2>
+      <div class="price">${money(p.price)}</div>
+      <p>${p.description || ""}</p>
+      <div class="small">Tồn kho: ${p.stock_qty}</div>
+
+      <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+        <input id="qty" class="input" style="max-width:120px" type="number" min="1" value="1"/>
+        <button class="btn" id="add">Thêm giỏ</button>
+      </div>
+      <div id="msg" class="msg"></div>
+
+    `;
+
+    document.querySelector("#add").onclick = async () => {
+      const qty = parseInt(document.querySelector("#qty").value || "1", 10);
+      try{
+        await api("/cart/add", { method:"POST", auth:true, body:{ product_id:id, qty }});
+        document.querySelector("#msg").textContent = "✅ Đã thêm vào giỏ";
+      }catch(e){
+        document.querySelector("#msg").textContent = "❌ " + e.message + " (hãy login)";
+      }
+    };
+  }
+  main();
+</script>
+</body>
+</html>

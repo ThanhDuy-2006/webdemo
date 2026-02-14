@@ -1,0 +1,114 @@
+/* Bottom Sheet Override for Detail */
+.detail-sheet {
+    background: #1e293b;
+    border-radius: 24px 24px 0 0;
+    padding: 24px;
+    height: 85vh; /* Taller for detail */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.detail-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.detail-amount {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    margin: 8px 0;
+}
+.detail-amount.income { color: #2ecc71; }
+.detail-amount.expense { color: #ef4444; }
+
+.detail-date {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+/* Sections */
+.detail-section {
+    background: #0f172a;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #1e293b;
+}
+.detail-row:last-child { border-bottom: none; }
+
+.detail-label {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.detail-value {
+    color: #fff;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Category Change */
+.cat-change-btn {
+    background: #334155;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #fff;
+    margin-left: 8px;
+}
+
+/* Source Info */
+.source-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.source-wallet { background: #3b82f620; color: #3b82f6; }
+.source-order { background: #f59e0b20; color: #f59e0b; }
+.source-manual { background: #10b98120; color: #10b981; }
+
+/* Actions */
+.action-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: auto;
+}
+
+.btn-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    background: #334155;
+    color: #fff;
+}
+.btn-delete { background: #ef444420; color: #ef4444; }
+
+/* History Log */
+.history-log {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #334155;
+}
