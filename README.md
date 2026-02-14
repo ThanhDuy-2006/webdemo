@@ -67,6 +67,64 @@ Nếu muốn chạy dev mode hoặc không dùng Docker:
 3. `npm install`
 4. `npm run dev`
 
+## 🚀 Deployment Guide (Production)
+
+### 1. Frontend (Vercel - Recommended)
+The React/Vite frontend is optimized for **Vercel**.
+
+1. **Push Code to GitHub**:
+   ```bash
+   git add .
+   git commit -m "Ready for deploy"
+   git push origin master
+   ```
+
+2. **Deploy on Vercel**:
+   - Go to [Vercel Dashboard](https://vercel.com/new).
+   - Import your GitHub repository.
+   - **Root Directory**: Click `Edit` and select `frontend`.
+   - **Build Command**: `npm run build` (Default).
+   - **Output Directory**: `dist` (Default).
+   - **Environment Variables**:
+     - `VITE_API_URL`: URL of your deployed backend (e.g., `https://webbanhang-api.onrender.com/api`).
+     - `VITE_SOCKET_URL`: URL of your deployed backend (e.g., `https://webbanhang-api.onrender.com`).
+     - `VITE_RECAPTCHA_SITE_KEY`: Your production ReCaptcha key.
+
+### 2. Backend & Database (Render / Railway)
+**IMPORTANT**: The Backend uses **Socket.IO** (WebSockets) and **MySQL** (Stateful DB), which are NOT supported natively on Vercel Serverless Functions. You must deploy the backend to a provider that supports long-running processes like **Render**, **Railway**, or a **VPS**.
+
+#### Option A: Render.com (Easiest Free Tier)
+1. Create a [Render Account](https://render.com).
+2. **Database (MySQL)**:
+   - Create a new **MySQL** database (Free tier handles limited connections).
+   - Copy the `Internal DB URL` or `External DB URL`.
+
+3. **Backend Service**:
+   - Create a new **Web Service**.
+   - Connect your GitHub repo.
+   - **Root Directory**: `backend`.
+   - **Build Command**: `npm install`.
+   - **Start Command**: `npm start`.
+   - **Environment Variables**:
+     - `NODE_ENV`: `production`
+     - `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`: From your MySQL service.
+     - `JWT_SECRET`: Random secure string.
+     - `FRONTEND_URL`: `https://your-frontend.vercel.app` (The Vercel URL from Step 1).
+     - `PORT`: `10000` (Render default).
+
+#### Option B: Railway.app (Simpler, Paid after trial)
+1. Create a new project on Railway.
+2. Add **MySQL** plugin.
+3. Add **Redis** plugin.
+4. Deploy the Repo (it will auto-detect Dockerfile).
+5. Set Environment Variables in Railway dashboard.
+
+### 3. Final Connection
+After deploying both:
+1. Update `VITE_API_URL` in your Vercel project settings to point to the new Backend URL.
+2. Update `FRONTEND_URL` in your Backend service settings to point to the new Vercel Frontend URL.
+3. Redeploy both services.
+
 ## 📂 Cấu trúc thư mục
 
 ```
